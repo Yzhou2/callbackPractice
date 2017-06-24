@@ -22,19 +22,25 @@ and what you should write is the sayHi function that makes the code above work,
 
 // 1. Write a function called first that returns the first item of the array using a callback function
 
+  function first(array, func) {
+   return func(array[0]) 
+  }
   // Code Here
 
   
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 first(names, function(firstName){
   console.log('The first name in names is ' + firstName)
-});
+})
 
+/* tyler tyler cohlan cahlan ryan colt blaine*/
 
 
 // 2. Write a function called last which returns the last item of the array using a callback function.
 
-  //Code Here
+  function last(array, func){
+    return func(array[array.length-1]);
+  }//Code Here
 
 last(names, function(lastName){
   console.log('The last name in names is ' + lastName);
@@ -44,6 +50,9 @@ last(names, function(lastName){
 
 // 3. Write a function called multiply that multiplies two numbers using a callback function.
 
+  function multiply(num1, num2, func) {
+   return  func(num1*num2);
+ }
   //Code Here
 
 
@@ -56,7 +65,14 @@ multiply(4, 3, function(answer){
 // 4. Write a function called contains that checks if a name exists in an array. 
 // If it does, return true using the callback, if not return false.
 
-  //Code Here 
+  function contains(arr, val, func) {
+    for (var i =0; i < arr.length; i++) {
+      if (arr[i] === val) {
+        return func(true);
+      }
+      return func(false);
+    }
+  }//Code Here 
 
 contains(names, 'Colt', function(result){
   if(result === true){
@@ -71,6 +87,21 @@ contains(names, 'Colt', function(result){
 // 5. Write a function called uniq that takes the names array and removes all duplicates and returns 
 // the callback function with the array of unique names.
 
+    function uniq(arr,func) {
+      
+      for (var i = 0; i <arr.length - 1; i++) {
+           for (var x = i+1; x < arr.length; x++) {
+             if (arr[i]===arr[x]) {
+               arr.splice(x,1);
+             }
+               
+             }
+  
+          
+        }
+        return func(arr);
+      }
+      
     //Code Here
 
 uniq(names, function(uniqArr){
@@ -81,7 +112,16 @@ uniq(names, function(uniqArr){
 // 6. Write a function called each that takes in an array of names. For each item, use a callback 
 // function to return the indices and item.
 
-    //Code Here 
+    function each(arr,func) {
+       for (var i = 0; i < arr.length; i++) {
+           
+
+       func(arr[i],i);
+       }
+
+   
+  
+    }//Code Here 
 
 each(names, function(item, indice){
   console.log('The item in the ' + indice + ' position is ' + item)
@@ -90,7 +130,7 @@ each(names, function(item, indice){
 
 
 // 7. Write a function called getUserById that looks at the array of user objects (users) and searches for a user by ID 
-// and returns that user.
+//and returns that user.
 
  //Code Here
 
